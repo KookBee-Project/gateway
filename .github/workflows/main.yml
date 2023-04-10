@@ -24,7 +24,7 @@ jobs:
         run: ./gradlew build
 
       - name: 도커 이미지 빌드 # (2)
-        run: docker build -t ${{ secrets.DOCKER_REPONAME }} .
+        run: docker build -t jinu0125/kookbee-gateway .
 
       - name: Docker Hub 로그인 # (3)
         uses: docker/login-action@v2
@@ -33,7 +33,7 @@ jobs:
           password: ${{ secrets.DOCKER_TOKEN }}
 
       - name: Docker Hub 퍼블리시 # (4)
-        run: docker push ${{ secrets.DOCKER_REPONAME }}
+        run: docker push jinu0125/kookbee-gateway
 
 
       - name: GCP 인스턴스 접속 및 애플리케이션 실행 # (5)
@@ -45,7 +45,7 @@ jobs:
           port: ${{ secrets.GCP_SSH_PORT }}
           script: |
             sudo su
-            sudo docker stop $(sudo docker ps -a -q) 
-            sudo docker rm $(sudo docker ps -a -q) 
-            sudo docker pull ${{ secrets.DOCKER_REPONAME }}
-            sudo docker run -d -p 80:8080 --name kookbee-gateway ${{ secrets.DOCKER_REPONAME }}
+            sudo docker stop $(sudo docker ps -a | grep kookbee-gateway | awk '{print $1}') 
+            sudo docker rm $(sudo docker ps -a | grep kookbee-gateway | awk '{print $1}') 
+            sudo docker pull jinu0125/kookbee-gateway
+            sudo docker run -d -p 80:8080 --name kookbee-gateway jinu0125/kookbee-gateway
