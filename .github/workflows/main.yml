@@ -48,4 +48,4 @@ jobs:
             sudo docker stop $(sudo docker ps -a | grep kookbee-gateway | awk '{print $1}') 
             sudo docker rm $(sudo docker ps -a | grep kookbee-gateway | awk '{print $1}') 
             sudo docker pull jinu0125/kookbee-gateway
-            sudo docker run -d -p 80:8080 --name kookbee-gateway jinu0125/kookbee-gateway
+            sudo docker run -d -p 8000:8000 --name kookbee-gateway jinu0125/kookbee-gateway
