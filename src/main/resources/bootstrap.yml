@@ -2,5 +2,5 @@ spring:
   cloud:
     config:
       enabled: true
-      uri: http://34.64.151.63:8888
+      uri: http://localhost:8888
       name: jwt
