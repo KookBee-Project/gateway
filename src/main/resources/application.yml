@@ -7,23 +7,25 @@ spring:
     name: gateway
   cloud:
     gateway:
-      default-filters: # ?? ??? ??? ????? ?????.
+      default-filters:
         - name: GlobalFilter
           args:
             baseMessage: GlobalFilterTest
             preLogger: true
             postLogger: true
       routes:
-        - id: user-service #???? id??
-          uri: lb://USER-SERVICE #???? ??? ???? ??
+        - id: user-service
+          uri: lb://USER-SERVICE
           predicates:
-            - Path=/user/** # ?? ???? ??? ?? ? ??
-          filters:
-            - JwtFilter # jwt ?? ??
+            - Path=/user/**
+        - id: class-service
+          uri: lb://CLASS-SERVICE
+          predicates:
+            - Path=/class/**
 
 eureka:
   client:
     register-with-eureka: true
     fetch-registry: true
     service-url:
-      defaultZone: http://10.178.0.5:8761/eureka #????? ??? ?
+      defaultZone: http://34.64.69.238:8761/eureka
