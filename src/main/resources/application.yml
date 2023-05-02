@@ -39,7 +39,10 @@ spring:
           uri: lb://CLASS-SERVICE
           predicates:
             - Path=/class/**
-
+        - id: file-service
+          uri: lb://FILE-SERVICE
+          predicates:
+            - Path=/upload/**
 eureka:
   client:
     register-with-eureka: true
