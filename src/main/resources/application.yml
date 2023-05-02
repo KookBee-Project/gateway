@@ -13,6 +13,8 @@ spring:
             allowedOrigins:
               - http://localhost:3000
               - http://localhost:3001
+              - http://34.125.119.98:3000
+              - http://34.125.119.98:3001
             allow-credentials: true
             allowedHeaders: '*'
             allowedMethods:
